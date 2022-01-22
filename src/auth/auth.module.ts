@@ -11,7 +11,7 @@ import { JwtStrategyService } from './jwt-strategy/jwt-strategy.service';
 		JwtModule.register({
 			secret: 'test2k21tallosNeMDb',
 			signOptions: {
-				expiresIn: '60s',
+				expiresIn: '300s',
 			}
 		}),
 		UsersModule
