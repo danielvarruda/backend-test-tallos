@@ -4,26 +4,35 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
+    createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
+
     const user = new this.userModel(createUserDto);
-    return user.save();
+    return await user.save();
   }
 
-  findAll() {
-    return this.userModel.find();
+  async findAll() {
+    return await this.userModel.find();
   }
 
-  findOne(id: string) {
-    return this.userModel.findById(id);
+  async findOne(id: string) {
+    return await this.userModel.findById(id);
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userModel.findByIdAndUpdate(
+  async findUsername(username: string) {
+    return await this.userModel.findOne({
+      'username': username
+    });
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userModel.findByIdAndUpdate(
       {
         _id: id,
       },
@@ -36,8 +45,8 @@ export class UsersService {
     );
   }
 
-  remove(id: string) {
-    return this.userModel.deleteOne(
+  async remove(id: string) {
+    return await this.userModel.deleteOne(
       {
         _id: id,
       }
