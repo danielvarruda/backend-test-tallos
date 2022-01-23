@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
+      'mongodb+srv://root:KTallMDb2k20@cluster0.nsqll.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
     ),
     UsersModule,
     AuthModule
