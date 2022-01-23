@@ -53,23 +53,18 @@ export class UsersService {
 			{
 				new: true,
 			}
-		);
+		).catch(function () {
+			throw new HttpException("Erro ao atualizar registro", HttpStatus.BAD_REQUEST);
+		});
 	}
 
-	async remove(id: string) {
-		try {
-			const remove = await this.userModel.deleteOne(
-				{
-				_id: id,
-				}
-			).exec();
-
-			if (remove.deletedCount == 0)
-				throw new HttpException('Nenhum registro deletado', HttpStatus.NOT_MODIFIED);
-
-			return remove;
-		} catch (erro) {
-			throw new HttpException('Erro ao deletar registro', HttpStatus.BAD_REQUEST);
-		}
+	remove(id: string): Object {
+		return this.userModel.deleteOne({
+			_id: id,
+		})
+		.exec()
+		.catch(function () {
+			throw new HttpException("Erro ao deletar registro", HttpStatus.BAD_REQUEST);
+		});
 	}
 }

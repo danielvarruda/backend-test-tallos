@@ -6,7 +6,7 @@ services:
     container_name: nest_api
     build: .
     ports:
-      - "3000:3000"
+      - "8000:3000"
     volumes:
       - .: /home/api
       - /home/api/node_modules
