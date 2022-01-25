@@ -14,14 +14,9 @@ export class AuthController {
         return { token: token };
     }
 
-    @Role('admin')
-    @UseGuards(JwtGuard, RoleGuard)
-    @Get('test-auth')
+    @UseGuards(JwtGuard)
+    @Get('load-session')
     test(@Req() req) {
-        console.log(req.user);
-
-        return {
-            name: "Daniel"
-        }
+        return req.user;
     }
 }
