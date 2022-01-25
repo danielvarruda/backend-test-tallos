@@ -11,7 +11,7 @@ import { RoleGuard } from 'src/auth/role.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Role(['admin', 'gerente'])
+  @Role(['admin', 'editor'])
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -22,20 +22,19 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Role(['admin', 'editor', 'leitor'])
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
-  @Role(['admin', 'gerente'])
-  @UseGuards(RoleGuard)
+  @Role(['admin', 'editor'])
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Role(['admin'])
-  @UseGuards(RoleGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
