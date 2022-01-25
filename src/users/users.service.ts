@@ -26,14 +26,16 @@ export class UsersService {
 		return await this.userModel.find()
 			.select('name')
 			.select('username')
-			.select('role');
+			.select('role')
+			.select('sector');
 	}
 
 	async findOne(id: string) {
 		return await this.userModel.findById(id)
 			.select('name')
 			.select('username')
-			.select('role');;
+			.select('role')
+			.select('sector');
 	}
 
 	async findUsername(username: string) {

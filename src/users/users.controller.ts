@@ -6,13 +6,12 @@ import { JwtGuard } from 'src/auth/auth/jwt.guard';
 import { Role } from 'src/auth/role.decorator';
 import { RoleGuard } from 'src/auth/role.guard';
 
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard, RoleGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Role('c')
-  @UseGuards(RoleGuard)
+  @Role(['admin', 'gerente'])
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -28,14 +27,14 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @Role('u')
+  @Role(['admin', 'gerente'])
   @UseGuards(RoleGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Role('d')
+  @Role(['admin'])
   @UseGuards(RoleGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
