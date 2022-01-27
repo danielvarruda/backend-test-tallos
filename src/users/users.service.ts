@@ -23,11 +23,13 @@ export class UsersService {
 	}
 
 	async findAll() {
-		return await this.userModel.find()
-			.select('name')
-			.select('username')
-			.select('role')
-			.select('sector');
+		return await this.userModel.find({
+			role: { $ne: 'admin' }
+		})
+		.select('name')
+		.select('username')
+		.select('role')
+		.select('sector');
 	}
 
 	async findOne(id: string) {
