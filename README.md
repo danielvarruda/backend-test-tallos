@@ -18,12 +18,6 @@ Contudo, devido a conteinerização aplicada nessa API é possível simplificar 
 docker-compose up --build
 ```
 
-Caso já tenha rodado o comando acima e deseje reiniciar a API, rode o seguinte comando:
-
-```sh
-npm run start
-```
-
 A pasta node_modules fica dentro do docker pra facilitar a instalação. Logo ela não é criada em sua máquina local. Isso pode gerar alguns erros de importação em sua IDE, mas é algo apenas visual. Caso queira que tudo funcione sem incomodos instale o node js em sua máquina. Em seguida rode o seguinte comando dentro desse projeto: 
 
 ```sh
@@ -33,7 +27,7 @@ npm install
 A API rodará em:
 
 ```sh
-127.0.0.1:3000
+127.0.0.1:3000 ou localhost:3000
 ```
 
 ## License
