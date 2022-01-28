@@ -30,5 +30,13 @@ A API rodará em:
 127.0.0.1:3000 ou localhost:3000
 ```
 
+## Documentação
+
+Você encontrará uma documentação feita pelo swagger em:
+
+```sh
+127.0.0.1:3000/api
+```
+
 ## License
 **Software Livre, Divirta-se!**
